@@ -2,47 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Scientific Calculator – Free Online Calculator</title>
+  <meta name="description" content="A free, fast, and responsive scientific calculator. Supports basic arithmetic, trigonometry, logarithms, square root, powers, and more. Works on mobile and desktop." />
+  <meta name="keywords" content="calculator, scientific calculator, online calculator, free calculator, math calculator" />
+  <meta name="author" content="Calculator App" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="index.html" />
+
+  <!-- Open Graph (social sharing) -->
+  <meta property="og:title" content="Scientific Calculator – Free Online Calculator" />
+  <meta property="og:description" content="A free responsive scientific calculator for basic and advanced math." />
+  <meta property="og:type" content="website" />
+
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#1e293b" />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <main id="container" role="main" aria-label="Scientific Calculator">
 
-    <!-- main container -->
-    <div id="container">
-        <div class="header">
-            <h1>Calculator</h1>
-        </div>
-        <div id="cal">
-            <div class="display">
-                <input type="text" id="result" disabled>
+    <header class="header">
+      <h1>Scientific Calculator</h1>
+    </header>
 
-            </div>
-            <div class="buttons">
-                <button class="btn">7</button>
-                <button class="btn">8</button>
-                <button class="btn">9</button>
-                <button class="btn">/</button>
-                <button class="btn">4</button>
-                <button class="btn">5</button>
-                <button class="btn">6</button>
-                <button class="btn">*</button>
-                <button class="btn">1</button>
-                <button class="btn">2</button>
-                <button class="btn">3</button>
-                <button class="btn">-</button>
-                <button class="btn">0</button>
-                <button class="btn">.</button>
-                <button class="btn btn-equals">=</button>
-                <button class="btn">+</button>
-                <button class="btn btn-clear">C</button>
-            </div>
-        </div>
-    </div>
+    <section id="cal" aria-label="Calculator">
 
-    <script src="javascript.js"></script>
+      <!-- Display -->
+      <div class="display" aria-live="polite">
+        <div class="display-expression" id="expression">&nbsp;</div>
+        <input type="text" id="result" inputmode="none" readonly aria-label="Calculator display" placeholder="0" />
+      </div>
+
+      <!-- Scientific row -->
+      <div class="buttons sci-row">
+        <button class="btn btn-fn" data-action="sin">sin</button>
+        <button class="btn btn-fn" data-action="cos">cos</button>
+        <button class="btn btn-fn" data-action="tan">tan</button>
+        <button class="btn btn-fn" data-action="log">log</button>
+        <button class="btn btn-fn" data-action="ln">ln</button>
+        <button class="btn btn-fn" data-action="sqrt">√</button>
+        <button class="btn btn-fn" data-action="pow">xʸ</button>
+        <button class="btn btn-fn" data-action="pi">π</button>
+        <button class="btn btn-fn" data-action="e">e</button>
+        <button class="btn btn-fn" data-action="paren">(  )</button>
+      </div>
+
+      <!-- Basic buttons -->
+      <div class="buttons basic-row">
+        <button class="btn btn-clear" data-action="C">C</button>
+        <button class="btn btn-op" data-action="backspace">⌫</button>
+        <button class="btn btn-op" data-action="%">%</button>
+        <button class="btn btn-op" data-action="/">&div;</button>
+
+        <button class="btn btn-num" data-action="7">7</button>
+        <button class="btn btn-num" data-action="8">8</button>
+        <button class="btn btn-num" data-action="9">9</button>
+        <button class="btn btn-op" data-action="*">&times;</button>
+
+        <button class="btn btn-num" data-action="4">4</button>
+        <button class="btn btn-num" data-action="5">5</button>
+        <button class="btn btn-num" data-action="6">6</button>
+        <button class="btn btn-op" data-action="-">−</button>
+
+        <button class="btn btn-num" data-action="1">1</button>
+        <button class="btn btn-num" data-action="2">2</button>
+        <button class="btn btn-num" data-action="3">3</button>
+        <button class="btn btn-op" data-action="+">+</button>
+
+        <button class="btn btn-num" data-action="0">0</button>
+        <button class="btn btn-num" data-action=".">.</button>
+        <button class="btn btn-equals" data-action="=" aria-label="equals">=</button>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="javascript.js"></script>
 </body>
 
 </html>
