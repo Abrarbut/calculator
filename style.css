@@ -1,108 +1,230 @@
-* {
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #eef2f7, #d9e2ec);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  padding: 12px;
 }
 
+/* ============================================================
+   Container
+   ============================================================ */
 #container {
-  width: min(420px, 92vw);
-  background-color: #f9fafb;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 420px;
+  background: #1e293b;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
 }
 
+/* ============================================================
+   Header
+   ============================================================ */
 .header {
   text-align: center;
-  margin: 0 0 16px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #007bff;
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid #334155;
 }
 
 .header h1 {
-  margin: 0;
-  font-size: 24px;
-  letter-spacing: 0.5px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #94a3b8;
 }
 
+/* ============================================================
+   Calculator panel
+   ============================================================ */
 #cal {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 16px;
-  border: 1px solid #d4e2ff;
-  border-radius: 12px;
-  background-color: #ffffff;
 }
 
+/* ============================================================
+   Display
+   ============================================================ */
 .display {
-  background-color: #e9f5d0;
-  padding: 10px;
-  border-radius: 8px;
+  background: #0f172a;
+  padding: 12px 16px 10px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 2px;
 }
 
-.display input {
+.display-expression {
+  font-size: 0.8rem;
+  color: #475569;
+  min-height: 1.2em;
+  word-break: break-all;
+  text-align: right;
+}
+
+#result {
   width: 100%;
   border: none;
   background: transparent;
-  font-size: 28px;
+  font-size: clamp(1.6rem, 8vw, 2.4rem);
+  font-weight: 300;
   text-align: right;
-  padding: 8px 4px;
-  color: #0f172a;
+  color: #f1f5f9;
+  caret-color: transparent;
+  cursor: default;
 }
 
-.display input:focus {
+#result:focus {
   outline: none;
 }
 
+/* ============================================================
+   Button grids – no gap/padding leaking outside
+   ============================================================ */
 .buttons {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 1px;
+  background: #0f172a; /* gap color via background */
 }
 
-button {
-  padding: 16px;
-  font-size: 18px;
+/* Scientific row: 5 columns × 2 rows = 10 buttons */
+.sci-row {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Basic row: 4 columns */
+.basic-row {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ============================================================
+   Base button
+   ============================================================ */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: #ffffff;
+  font-family: inherit;
+  font-size: clamp(0.85rem, 3.5vw, 1.05rem);
+  font-weight: 500;
+  padding: 0;
+  height: clamp(44px, 12vw, 58px);
   cursor: pointer;
-  transition: transform 120ms ease, background-color 120ms ease;
+  user-select: none;
+  transition: filter 100ms ease, transform 80ms ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-1px);
+.btn:active {
+  filter: brightness(1.35);
+  transform: scale(0.96);
 }
 
-button:active {
-  transform: translateY(0);
+/* ============================================================
+   Button variants
+   ============================================================ */
+
+/* Numbers */
+.btn-num {
+  background: #1e293b;
+  color: #f1f5f9;
 }
 
-.btn-equals {
-  grid-column: span 2;
-  background-color: #16a34a;
+.btn-num:hover {
+  background: #273548;
 }
 
-.btn-equals:hover {
-  background-color: #15803d;
+/* Operators */
+.btn-op {
+  background: #1e3a5f;
+  color: #60a5fa;
+  font-size: clamp(1rem, 4vw, 1.3rem);
 }
 
+.btn-op:hover {
+  background: #1d4ed8;
+  color: #fff;
+}
+
+/* Scientific / function */
+.btn-fn {
+  background: #1a2535;
+  color: #7dd3fc;
+  font-size: clamp(0.7rem, 2.8vw, 0.85rem);
+  letter-spacing: 0.3px;
+}
+
+.btn-fn:hover {
+  background: #0369a1;
+  color: #fff;
+}
+
+/* Clear */
 .btn-clear {
-  background-color: #ef4444;
+  background: #450a0a;
+  color: #fca5a5;
+  font-size: clamp(0.85rem, 3.5vw, 1rem);
+  font-weight: 700;
 }
 
 .btn-clear:hover {
-  background-color: #dc2626;
+  background: #dc2626;
+  color: #fff;
 }
 
+/* Equals – spans 2 columns */
+.btn-equals {
+  grid-column: span 2;
+  background: #166534;
+  color: #bbf7d0;
+  font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+  font-weight: 700;
+}
 
+.btn-equals:hover {
+  background: #16a34a;
+  color: #fff;
+}
+
+/* ============================================================
+   Responsive – small phones (≤ 360px)
+   ============================================================ */
+@media (max-width: 360px) {
+  .btn {
+    height: 44px;
+  }
+
+  .display {
+    min-height: 76px;
+  }
+}
+
+/* ============================================================
+   Responsive – tablets / landscape phones
+   ============================================================ */
+@media (min-width: 500px) {
+  #container {
+    border-radius: 24px;
+  }
+}
